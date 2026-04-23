@@ -1,0 +1,57 @@
+from shop.models import Category, Product
+
+# Санаттарды құру
+c1 = Category.objects.create(name="Смартфондар")
+c2 = Category.objects.create(name="Ноутбуктер")
+c3 = Category.objects.create(name="Құлаққаптар")
+c4 = Category.objects.create(name="Сағаттар")
+c5 = Category.objects.create(name="Аксессуарлар")
+
+# Тауарларды қосу
+# Смартфондар
+Product.objects.create(category=c1, title="iPhone 15 Pro", description="Apple A17 Pro", price=550000)
+Product.objects.create(category=c1, title="Samsung Galaxy S24", description="Android 14", price=420000)
+Product.objects.create(category=c1, title="Google Pixel 8", description="Pure Android", price=350000)
+
+# Ноутбуктер
+Product.objects.create(category=c2, title="MacBook Air M2", description="Apple Silicon", price=600000)
+Product.objects.create(category=c2, title="Asus ROG Zephyrus", description="Gaming Laptop", price=850000)
+Product.objects.create(category=c2, title="Lenovo ThinkPad", description="Business Series", price=480000)
+
+# Құлаққаптар
+Product.objects.create(category=c3, title="AirPods Pro 2", description="Noise Cancelling", price=120000)
+Product.objects.create(category=c3, title="Sony WH-1000XM5", description="Industry Leading Noise Canceling", price=180000)
+Product.objects.create(category=c3, title="JBL Tune", description="Budget wireless", price=25000)
+
+# Сағаттар
+Product.objects.create(category=c4, title="Apple Watch Series 9", description="Health sensor", price=220000)
+Product.objects.create(category=c4, title="Samsung Watch 6", description="Wear OS", price=145000)
+Product.objects.create(category=c4, title="Garmin Fenix 7", description="For Pro athletes", price=380000)
+
+# Аксессуарлар
+Product.objects.create(category=c5, title="MagSafe Charger", description="Fast wireless", price=25000)
+Product.objects.create(category=c5, title="USB-C Hub", description="7-in-1", price=18000)
+Product.objects.create(category=c5, title="Cheap Case", description="Simple silicone", price=5000)
+
+
+# 4. Күрделі фильтрация (Lookup әдістері: __gte және __icontains)
+# Бағасы 200,000-нан жоғары және атауында "Apple" сөзі бар тауарлар
+expensive_apple = Product.objects.filter(price__gte=200000, title__icontains="Apple")
+print(expensive_apple)
+
+
+# 5. Сұрыптау (Бағасы бойынша кему ретімен)
+sorted_products = Product.objects.order_by('-price')
+print(sorted_products)
+
+
+# 6. Жаппай жаңарту (Update)
+# Атауында "Samsung" сөзі бар барлық тауарлардың сипаттамасын жаңарту
+Product.objects.filter(title__icontains="Samsung").update(description="Official Samsung Product 2026")
+
+
+# 7. Нысандарды жою (Delete)
+# Бағасы 10,000-нан төмен барлық арзан тауарларды базадан өшіру
+Product.objects.filter(price__lt=10000).delete()
+
+# Соңы.

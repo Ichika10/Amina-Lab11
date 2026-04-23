@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="product-detail-area">
+        <h1>{{ product.title }}</h1>
+        <p>{{ product.description }}</p>
+        <p>Бағасы: <strong>{{ product.price }} тг</strong></p>
+
+
+        <blockquote>{{product}}</blockquote>
+    </div>
+
+    <hr>
+
+    <section class="reviews-section">
+        <h3>Тұтынушылар пікірі ({{ product.reviews.count }}):</h3>
+        
+        {% for review in product.reviews.all %}
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="review-author">{{ review.author }}</span>
+                    <span class="review-date">{{ review.created_at|date:"d.m.Y, H:i" }}</span>
+                </div>
+                <p class="review-text">{{ review.text }}</p>
+            </div>
+        {% empty %}
+            <p>Әзірге пікірлер жоқ, бірінші болып пікір қалдырыңыз!</p> 
+        {% endfor %}
+    </section>
+{% endblock %}

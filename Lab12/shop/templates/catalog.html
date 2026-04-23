@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Барлық тауарлар</h1>
+    <div>
+        {% for prod in products %}
+            <div class="product-item">
+                <h3>{{ prod.title }}</h3>
+                <p>Бағасы: <strong>{{ prod.price }} тг</strong></p>
+                <a href="{% url 'product_detail' prod.id %}">Толығырақ көру &rarr;</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

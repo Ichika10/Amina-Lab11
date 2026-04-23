@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Интернет дүкен{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Басты бет</a>
+            <a href="{% url 'catalog' %}">Каталог</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %} {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Интернет-дүкен. Барлық құқықтар қорғалған.</p>
+    </footer>
+</body>
+</html>
